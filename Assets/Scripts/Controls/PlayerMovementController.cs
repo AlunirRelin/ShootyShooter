@@ -12,6 +12,7 @@ public class PlayerMovementController : NetworkBehaviour
     public float moveSpeed;
     public float jumpHeight;
     public float groundDrag;
+    public float airDragMult;
     public float playerHeight;
     public LayerMask whatIsGround;
     public bool grounded;
@@ -50,8 +51,14 @@ public class PlayerMovementController : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isOwned) { return;}
-        rb.AddRelativeForce(movement * moveSpeed);
-        
+        if (grounded)
+        {
+            rb.AddRelativeForce(movement * moveSpeed);
+        }
+        else
+        {
+            rb.AddRelativeForce(movement * (moveSpeed * airDragMult));
+        }
         if (Input.GetKey(KeyCode.Space) & grounded)
         {
             rb.AddForce(Vector3.up * jumpHeight);

@@ -8,8 +8,8 @@ using Inputs;
 public class PlayerCameraController : NetworkBehaviour
 {
     [Header("camera")]
-    [SerializeField] private Vector2 maxFollowOffset = new Vector2(-1f, 6f);
-    [SerializeField] private Vector2 cameraVelocity = new Vector2(4f, 0.25f);
+    [SerializeField] float senseY;
+    [SerializeField] float senseX;
     [SerializeField] private Transform playerTransform = null;
     [SerializeField] private CinemachineVirtualCamera virtualCamera = null;
 
@@ -22,10 +22,8 @@ public class PlayerCameraController : NetworkBehaviour
             return controls = new Inputs.Controls();
         }
     }
-    private CinemachineTransposer transposer;
     public override void OnStartAuthority()
     {
-        transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
         virtualCamera.gameObject.SetActive(true);
         enabled = true; 
 
@@ -38,11 +36,7 @@ public class PlayerCameraController : NetworkBehaviour
     private void Look(Vector2 lookAxis)
     {
         float deltaTime = Time.deltaTime;
-        /* transposer.m_FollowOffset.y = Mathf.Clamp(
-            transposer.m_FollowOffset.y - ( lookAxis.y * cameraVelocity.y * deltaTime),
-            maxFollowOffset.x,
-            maxFollowOffset.y);*/
-
-        playerTransform.Rotate(0f, lookAxis.x * cameraVelocity.x * deltaTime, 0f);
+        virtualCamera.transform.Rotate(-lookAxis.y * senseY * deltaTime, 0f, 0f);
+        playerTransform.Rotate(0f, lookAxis.x * senseX * deltaTime, 0f);
     }
 }
