@@ -1,51 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using UnityEngine.InputSystem;
 using Mirror;
 using Inputs;
 
 public class PlayerMovementController : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] private float movementSpeed = 5f;
-    [SerializeField] private CharacterController controller = null;
+    public CinemachineVirtualCamera cvc;
+    public float moveSpeed;
+    public float jumpHeight;
+    public float groundDrag;
+    public float playerHeight;
+    public LayerMask whatIsGround;
+    public bool grounded;
+    public InputAction controls;
 
-    private Vector2 previousInput;
-
-    private Controls controls;
-    private Controls Controls
-    {
-        get
-        {
-            if (controls == null) { return controls; }
-            return controls = new Controls();
-        }
-    }
+    Vector2 direction = new Vector2(0,0);
+    Vector3 movement = Vector3.zero;
+    Rigidbody rb;
     public override void OnStartAuthority()
     {
         enabled = true;
-        Controls.Player.Move.performed += ctx => SetMovement(ctx.ReadValue<Vector2>());
-        controls.Player.Move.canceled += ctx => ResetMovement();
-
+        controls.Enable();
     }
     [Client]
-    private void SetMovement(Vector2 movement) => previousInput = movement;
-
-    [Client]
-    private void ResetMovement() => previousInput = Vector2.zero;
-
-    [Client]
-
-    private void Update() => Move();
-    private void Move()
+    private void Start()
     {
-        Vector3 right = controller.transform.right;
-        Vector3 forward = controller.transform.forward;
-        right.y = 0f;
-        forward.y = 0f;
+        cvc = GetComponent<CinemachineVirtualCamera>();
+        if (!isOwned) { return; }
+        rb = GetComponent<Rigidbody>();
+    }
+    private void Update()
+    {
+        direction = controls.ReadValue<Vector2>();
+        movement = new Vector3(direction.x, 0, direction.y);
+        grounded =  Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        Vector3 movement = right.normalized * previousInput.x + forward.normalized * previousInput.y;
+        if (grounded)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = 0;
+        }
+    }
+    void FixedUpdate()
+    {
+        if (!isOwned) { return;}
+        rb.AddRelativeForce(movement * moveSpeed);
         
-        controller.Move(movement * movementSpeed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.Space) & grounded)
+        {
+            rb.AddForce(Vector3.up * jumpHeight);
+        }
     }
 }

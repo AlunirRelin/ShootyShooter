@@ -38,11 +38,10 @@ public class PlayerCameraController : NetworkBehaviour
     private void Look(Vector2 lookAxis)
     {
         float deltaTime = Time.deltaTime;
-
-        transposer.m_FollowOffset.y = Mathf.Clamp(
+        /* transposer.m_FollowOffset.y = Mathf.Clamp(
             transposer.m_FollowOffset.y - ( lookAxis.y * cameraVelocity.y * deltaTime),
             maxFollowOffset.x,
-            maxFollowOffset.y);
+            maxFollowOffset.y);*/
 
         playerTransform.Rotate(0f, lookAxis.x * cameraVelocity.x * deltaTime, 0f);
     }

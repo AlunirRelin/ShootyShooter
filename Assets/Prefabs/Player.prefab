@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3000262074023585926
 Transform:
   m_ObjectHideFlags: 0
@@ -25,8 +25,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680256240681328679}
-  m_LocalRotation: {x: -0.09620742, y: 0.09807604, z: 0.00952641, w: 0.99047184}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 6194296577176428056}
-  m_Follow: {fileID: 6194296577176428056}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 3011277698951842018}
   - component: {fileID: 512461263042811581}
   - component: {fileID: 5213511120988517571}
-  - component: {fileID: 3186967854252238698}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,7 +135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6194296577176428060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -302,9 +301,9 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &5213511120988517571
@@ -322,26 +321,64 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  movementSpeed: 5
-  controller: {fileID: 3186967854252238698}
---- !u!143 &3186967854252238698
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6194296577176428060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  cvc: {fileID: 0}
+  moveSpeed: 15
+  jumpHeight: 75
+  groundDrag: 1
+  playerHeight: 2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  grounded: 0
+  controls:
+    m_Name: Controls
+    m_Type: 2
+    m_ExpectedControlType: Vector2
+    m_Id: afdabbe5-2e17-4949-b5ba-2e8176df4f41
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 994c911f-5f15-4ca5-b679-ab89b8030976
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Controls
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 97cda03c-960b-4f40-bde0-2371b89b3469
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Controls
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 482d9c6e-0f87-4d14-ada6-4a1ab480763a
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Controls
+      m_Flags: 8
+    - m_Name: left
+      m_Id: f14c384d-105c-496c-9773-1d4f5bc30cb5
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Controls
+      m_Flags: 8
+    - m_Name: right
+      m_Id: ffdc33c6-54d1-4fa4-b5e6-776a6f0ccf4b
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Controls
+      m_Flags: 8
+    m_Flags: 0
 --- !u!1 &8517742787228568375
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -5}
+  m_FollowOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
