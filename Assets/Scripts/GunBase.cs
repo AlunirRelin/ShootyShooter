@@ -1,82 +1,104 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
-using Inputs;
+using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class GunBase : MonoBehaviour
 {
     [SerializeField]
-    private bool addBulletSpread = true;
+    private bool AddBulletSpread = true;
     [SerializeField]
-    private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
+    private Vector3 BulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
     [SerializeField]
-    private ParticleSystem shootingSystem;
+    private ParticleSystem ShootingSystem;
     [SerializeField]
-    private Transform bulletSpawnPoint;
+    private Transform BulletSpawnPoint;
     [SerializeField]
-    private ParticleSystem impactParticleSystem;
+    private ParticleSystem ImpactParticleSystem;
     [SerializeField]
-    private TrailRenderer bulletTrail;
+    private TrailRenderer BulletTrail;
     [SerializeField]
-    private float shootDelay = 0.5f;
+    private float ShootDelay = 0.5f;
     [SerializeField]
-    private LayerMask mask;
+    private LayerMask Mask;
+    [SerializeField]
+    private float BulletSpeed = 100;
 
-    private Animator animator;
-    private float lastShootTime;
+    private Animator Animator;
+    private float LastShootTime;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
     }
+
     public void Shoot()
     {
-        if(lastShootTime + shootDelay < Time.time)
+        if (LastShootTime + ShootDelay < Time.time)
         {
-            //animator.SetBool("IsShooting", true);
-            shootingSystem.Play();
+
+            Animator.SetBool("IsShooting", true);
+            ShootingSystem.Play();
             Vector3 direction = GetDirection();
 
-            if(Physics.Raycast(bulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, mask))
+            if (Physics.Raycast(BulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, Mask))
             {
-                TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
-                StartCoroutine(SpawnTrail(trail, hit));
-                lastShootTime = Time.time;
+                TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+
+                LastShootTime = Time.time;
+            }
+            else
+            {
+                TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, BulletSpawnPoint.position + GetDirection() * 100, Vector3.zero, false));
+
+                LastShootTime = Time.time;
             }
         }
     }
+
     private Vector3 GetDirection()
     {
         Vector3 direction = transform.forward;
 
-        if (addBulletSpread)
+        if (AddBulletSpread)
         {
             direction += new Vector3(
-                Random.Range(-bulletSpreadVariance.x, bulletSpreadVariance.x),
-                Random.Range(-bulletSpreadVariance.y, bulletSpreadVariance.y),
-                Random.Range(-bulletSpreadVariance.z, bulletSpreadVariance.z)
-                );
+                Random.Range(-BulletSpreadVariance.x, BulletSpreadVariance.x),
+                Random.Range(-BulletSpreadVariance.y, BulletSpreadVariance.y),
+                Random.Range(-BulletSpreadVariance.z, BulletSpreadVariance.z)
+            );
+
             direction.Normalize();
         }
+
         return direction;
     }
-    private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit hit)
-    {
-        float time = 0;
-        Vector3 startPosition = Trail.transform.position;
 
-        while(time < 1)
+    private IEnumerator SpawnTrail(TrailRenderer Trail, Vector3 HitPoint, Vector3 HitNormal, bool MadeImpact)
+    {
+
+        Vector3 startPosition = Trail.transform.position;
+        float distance = Vector3.Distance(Trail.transform.position, HitPoint);
+        float remainingDistance = distance;
+
+        while (remainingDistance > 0)
         {
-            Trail.transform.position = Vector3.Lerp(startPosition, hit.point, time);
-            time += Time.deltaTime / Trail.time;
+            Trail.transform.position = Vector3.Lerp(startPosition, HitPoint, 1 - (remainingDistance / distance));
+
+            remainingDistance -= BulletSpeed * Time.deltaTime;
 
             yield return null;
         }
-        //animator.SetBool("IsShooting", false);
-        Trail.transform.position = hit.point;
-        Instantiate(impactParticleSystem,hit.point,Quaternion.LookRotation(hit.normal));
+        Animator.SetBool("IsShooting", false);
+        Trail.transform.position = HitPoint;
+        if (MadeImpact)
+        {
+            Instantiate(ImpactParticleSystem, HitPoint, Quaternion.LookRotation(HitNormal));
+        }
 
         Destroy(Trail.gameObject, Trail.time);
     }

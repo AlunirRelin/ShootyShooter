@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 4704989656858675133}
   - component: {fileID: 2073828747401727532}
   - component: {fileID: 6706677446283652989}
-  - component: {fileID: 4250949717021843355}
   m_Layer: 0
   m_Name: gun
   m_TagString: Untagged
@@ -240,31 +239,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4250949717021843355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3497221301530688594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d79d5a3d7543d143b49536cd87db74c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  addBulletSpread: 1
-  bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
-  shootingSystem: {fileID: 4794043405585894027, guid: 37138c0c33167b04fa1fb90b7f5a794f,
-    type: 3}
-  bulletSpawnPoint: {fileID: 279171565230570515}
-  impactParticleSystem: {fileID: 4794043405585894027, guid: 37138c0c33167b04fa1fb90b7f5a794f,
-    type: 3}
-  bulletTrail: {fileID: 773346699807868009, guid: 76270841ecaedf542a358dd689548ce3,
-    type: 3}
-  shootDelay: 0.5
-  mask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!1 &6194296577176428060
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +258,8 @@ GameObject:
   - component: {fileID: 512461263042811581}
   - component: {fileID: 5213511120988517571}
   - component: {fileID: 6781098023062414484}
+  - component: {fileID: 3846469331930445460}
+  - component: {fileID: 3044186960449214710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -561,7 +537,51 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gun: {fileID: 4250949717021843355}
+  gun: {fileID: 0}
+--- !u!95 &3846469331930445460
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194296577176428060}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3044186960449214710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194296577176428060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d79d5a3d7543d143b49536cd87db74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddBulletSpread: 1
+  BulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
+  ShootingSystem: {fileID: 0}
+  BulletSpawnPoint: {fileID: 0}
+  ImpactParticleSystem: {fileID: 0}
+  BulletTrail: {fileID: 0}
+  ShootDelay: 0.5
+  Mask:
+    serializedVersion: 2
+    m_Bits: 0
+  BulletSpeed: 100
 --- !u!1 &8517742787228568375
 GameObject:
   m_ObjectHideFlags: 0
