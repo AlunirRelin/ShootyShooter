@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Mirror;
 
-public class Singleton<T> : MonoBehaviour
+public class Singleton<T> : NetworkBehaviour
     where T : Component
 {
     private static T _instance;

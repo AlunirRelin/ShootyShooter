@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private GunBase gun;
     public InputManager inputManager;
     Cinemachine.CinemachineVirtualCamera virtualCamera;
     Vector3 lookRot = new Vector3(0, 0, 0);
@@ -17,5 +19,9 @@ public class PlayerController : MonoBehaviour
     {
         lookRot = new Vector3(inputManager.mouseX, inputManager.mouseY, 0);
         virtualCamera.transform.rotation = Quaternion.LookRotation(lookRot);
+    }
+    void OnShoot()
+    {
+        gun.Shoot();
     }
 }
