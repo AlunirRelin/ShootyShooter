@@ -6,7 +6,7 @@ using Mirror;
 
 public class PlayerShootingController : NetworkBehaviour
 {
-    public GunBase gun;
+    public Gun gun;
     public void Update()
     {
         if (Input.GetMouseButtonDown(0))

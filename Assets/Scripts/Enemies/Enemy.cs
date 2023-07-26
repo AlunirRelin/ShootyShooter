@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class Enemy : NetworkBehaviour
 {
+    public float Hp = 20;
     public List<Transform> patrolPoints;
     public NavMeshAgent agent;
     [SerializeField]
@@ -29,6 +31,14 @@ public class Enemy : NetworkBehaviour
             Debug.Log("turn");
             patrolPoints.RemoveAt(0);
             agent.destination = patrolPoints[0].position;
+        }
+    }
+    public void Damage(float damage)
+    {
+        Hp -= damage;
+        if (Hp <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
