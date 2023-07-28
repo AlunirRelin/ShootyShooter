@@ -18,5 +18,9 @@ public class Player : NetworkBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

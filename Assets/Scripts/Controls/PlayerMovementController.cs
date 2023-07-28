@@ -28,12 +28,13 @@ public class PlayerMovementController : NetworkBehaviour
     [Client]
     private void Start()
     {
-        cvc = GetComponent<CinemachineVirtualCamera>();
         if (!isOwned) { return; }
+        cvc = GetComponent<CinemachineVirtualCamera>();
         rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
+        if (!isOwned) { return; }
         direction = controls.ReadValue<Vector2>();
         movement = new Vector3(direction.x, 0, direction.y);
         grounded =  Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);

@@ -9,8 +9,10 @@ public class PlayerShootingController : NetworkBehaviour
     public Gun gun;
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isOwned) { return; }
+        if (Input.GetMouseButton(0) && Time.time >= gun.FireCooldown)
         {
+            gun.FireCooldown = Time.time + 1f / gun.fireRate;
             gun.Shoot();
         }
     }

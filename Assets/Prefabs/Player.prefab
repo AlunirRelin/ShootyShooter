@@ -254,8 +254,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  impactFx: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
+    type: 3}
+  missFx: {fileID: 4794043405585894037, guid: 37138c0c33167b04fa1fb90b7f5a794f, type: 3}
+  DmgTextObj: {fileID: 7833442283972513928, guid: 8490820e890d8244ea043c65798fc4f8,
+    type: 3}
+  DmgText: {fileID: 7523771970667325265, guid: 8490820e890d8244ea043c65798fc4f8, type: 3}
   damage: 10
-  range: 100
+  fallofRange: 100
+  fireRate: 15
+  FireCooldown: 0
 --- !u!1 &6194296577176428060
 GameObject:
   m_ObjectHideFlags: 0

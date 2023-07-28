@@ -18,11 +18,8 @@ public class PlayerController : NetworkBehaviour
     }
     void Update()
     {
+        if (!isOwned) { return; }
         lookRot = new Vector3(inputManager.mouseX, inputManager.mouseY, 0);
         virtualCamera.transform.rotation = Quaternion.LookRotation(lookRot);
-    }
-    void OnShoot()
-    {
-        gun.Shoot();
     }
 }

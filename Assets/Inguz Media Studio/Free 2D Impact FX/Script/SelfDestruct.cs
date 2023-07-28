@@ -4,8 +4,6 @@ using System.Collections;
 
 namespace InguzPings
 {
-
-
 public class SelfDestruct : MonoBehaviour {
 	public float selfdestruct_in = 4; // Setting this to 0 means no selfdestruct.
 
@@ -15,6 +13,4 @@ public class SelfDestruct : MonoBehaviour {
 		}
 	}
 }
-
-
 }
