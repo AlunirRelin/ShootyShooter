@@ -5,11 +5,13 @@ using Mirror;
 
 public class Player : NetworkBehaviour
 {
+    public NetworkManagerHUD networkManagerHUD;
     Vector3 direction = new Vector3(1,0,1);
     Rigidbody rb;
     [Client]
     private void Start()
     {
+        networkManagerHUD = GetComponent<NetworkManagerHUD>();
     }
     void FixedUpdate()
     {

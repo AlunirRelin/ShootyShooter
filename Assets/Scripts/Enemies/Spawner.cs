@@ -15,7 +15,7 @@ public class Spawner : NetworkBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-        if (GameManager.Instance.networkManagerFps.numPlayers > 0 && timer <= 0)
+        if (GameManager.Instance.networkManagerFps.numPlayers >= 0 && timer <= 0)
         {
             Instantiate(enemyPrefabs[0],spawnPoint);
             timer = spawnSpeed;

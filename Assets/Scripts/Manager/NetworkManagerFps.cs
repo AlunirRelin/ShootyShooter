@@ -14,6 +14,7 @@ public class NetworkManagerFps : NetworkManager
     // have to cast to this type everywhere.
     public static new NetworkManagerFps singleton { get; private set; }
 
+    public NetworkManagerHUD mHud;
     /// <summary>
     /// Runs on both Server and Client
     /// Networking is NOT initialized when this fires
@@ -214,7 +215,11 @@ public class NetworkManagerFps : NetworkManager
     /// This is invoked when a host is started.
     /// <para>StartHost has multiple signatures, but they all cause this hook to be called.</para>
     /// </summary>
-    public override void OnStartHost() { }
+    public override void OnStartHost()
+    {
+        mHud = GetComponent<NetworkManagerHUD>();
+        mHud.enabled = false;
+    }
 
     /// <summary>
     /// This is invoked when a server is started - including when a host is started.
