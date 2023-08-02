@@ -436,6 +436,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  networkManagerHUD: {fileID: 0}
 --- !u!114 &3011277698951842018
 MonoBehaviour:
   m_ObjectHideFlags: 0
