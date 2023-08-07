@@ -13,6 +13,10 @@ public class PlayerMovementController : NetworkBehaviour
     public float groundDrag;
     public float airDragMult;
     public float playerHeight;
+    public float velocityX;
+    public float velocityZ;
+    public float airControlMult;
+
     public LayerMask whatIsGround;
     public bool grounded;
     public InputAction controls;
@@ -61,7 +65,17 @@ public class PlayerMovementController : NetworkBehaviour
         }
         if (Input.GetKey(KeyCode.Space) & grounded)
         {
+            Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
+            
             rb.AddForce(Vector3.up * jumpHeight);
         }
+        /*if (Input.GetKey(KeyCode.W))
+        {
+            velocityX = rb.velocity.x;
+            velocityZ = rb.velocity.z;
+            rb.velocity = new(rb.velocity.x - (rb.velocity.x * airControlMult),rb.velocity.y,rb.velocity.z - (rb.velocity.z * airControlMult));
+            rb.AddRelativeForce(Vector3.forward * ((velocityX + velocityZ)*airControlMult));
+            rb.velocity = rb.velocity / airControlMult;
+        }*/
     }
 }

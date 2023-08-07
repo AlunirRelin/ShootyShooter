@@ -493,6 +493,9 @@ MonoBehaviour:
   groundDrag: 1
   airDragMult: 0.4
   playerHeight: 2
+  velocityX: 0
+  velocityZ: 0
+  airControlMult: 0.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
