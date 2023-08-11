@@ -6,13 +6,16 @@ using UnityEngine.AI;
 
 public class TowerBase : NetworkBehaviour
 {
+    public GameObject impactFx;
     public GameObject[] enemyList;
     public GameObject nearestEnemy;
     public Transform target;
     public float range = 15f;
+    public float damage = 10f;
     void Start()
     {
         InvokeRepeating(nameof(FindTarget), 0f,0.2f);
+        InvokeRepeating(nameof(Shoot),0f,1f);
     }
     private void Update()
     {
@@ -41,6 +44,13 @@ public class TowerBase : NetworkBehaviour
         {
             target = nearestEnemy.transform;
         }
+    }
+    void Shoot()
+    {
+        if (target == null) return;
+        Enemy enemy= target.GetComponent<Enemy>();
+        enemy.Damage(damage);
+       // Instantiate(impactFx, target., Quaternion.LookRotation(target.normal));
     }
     private void OnDrawGizmosSelected()
     {

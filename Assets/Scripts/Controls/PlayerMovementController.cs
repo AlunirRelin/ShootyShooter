@@ -51,6 +51,14 @@ public class PlayerMovementController : NetworkBehaviour
         {
             rb.drag = 0;
         }
+
+        if (Input.GetKey(KeyCode.Space) & grounded)
+        {
+            Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpHeight);
+            rb.velocity = Vector3.Scale(rb.velocity, new(0.7f, 1, 0.7f));
+            rb.AddRelativeForce(Vector3.forward * (Mathf.Abs(rb.velocity.x) +Mathf.Abs(rb.velocity.z))*airControlMult);
+        }
     }
     void FixedUpdate()
     {
@@ -63,12 +71,6 @@ public class PlayerMovementController : NetworkBehaviour
         {
             rb.AddRelativeForce(movement * (moveSpeed * airDragMult));
         }
-        if (Input.GetKey(KeyCode.Space) & grounded)
-        {
-            Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
-            rb.AddForce(Vector3.up * jumpHeight);
-            rb.velocity = Vector3.Scale(rb.velocity, new(0.7f, 1, 0.7f));
-            rb.AddRelativeForce(Vector3.forward * (Mathf.Abs(rb.velocity.x) +Mathf.Abs(rb.velocity.z))*airControlMult);
-        }
+        
     }
 }
