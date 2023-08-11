@@ -66,16 +66,9 @@ public class PlayerMovementController : NetworkBehaviour
         if (Input.GetKey(KeyCode.Space) & grounded)
         {
             Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
-            
             rb.AddForce(Vector3.up * jumpHeight);
+            rb.velocity = Vector3.Scale(rb.velocity, new(0.7f, 1, 0.7f));
+            rb.AddRelativeForce(Vector3.forward * (Mathf.Abs(rb.velocity.x) +Mathf.Abs(rb.velocity.z))*airControlMult);
         }
-        /*if (Input.GetKey(KeyCode.W))
-        {
-            velocityX = rb.velocity.x;
-            velocityZ = rb.velocity.z;
-            rb.velocity = new(rb.velocity.x - (rb.velocity.x * airControlMult),rb.velocity.y,rb.velocity.z - (rb.velocity.z * airControlMult));
-            rb.AddRelativeForce(Vector3.forward * ((velocityX + velocityZ)*airControlMult));
-            rb.velocity = rb.velocity / airControlMult;
-        }*/
     }
 }

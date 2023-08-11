@@ -495,7 +495,7 @@ MonoBehaviour:
   playerHeight: 2
   velocityX: 0
   velocityZ: 0
-  airControlMult: 0.3
+  airControlMult: 1006
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
