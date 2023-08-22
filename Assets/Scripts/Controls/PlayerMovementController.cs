@@ -17,7 +17,7 @@ public class PlayerMovementController : NetworkBehaviour
     private Vector3 tempVelocity;
     private Vector3 tempVelocity2;
     public int ticksPerSecond = 60;
-    public float rotationAmount;
+    [SerializeField]
     private bool airControlable;
 
 
@@ -45,7 +45,7 @@ public class PlayerMovementController : NetworkBehaviour
         if (!isOwned) { return; }
         direction = controls.ReadValue<Vector2>();
         movement = new Vector3(direction.x, 0, direction.y);
-        grounded =  Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         if (grounded)
         {
@@ -55,55 +55,36 @@ public class PlayerMovementController : NetworkBehaviour
         {
             rb.drag = 0;
         }
-<<<<<<< Updated upstream
-
         if (Input.GetKey(KeyCode.Space) & grounded)
         {
-            Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
             rb.AddForce(Vector3.up * jumpHeight);
-            rb.velocity = Vector3.Scale(rb.velocity, new(0.7f, 1, 0.7f));
-            rb.AddRelativeForce(Vector3.forward * (Mathf.Abs(rb.velocity.x) +Mathf.Abs(rb.velocity.z))*airControlMult);
-=======
-        if(Input.GetKey(KeyCode.W) & !grounded)
+        }
+        if (Input.GetKey(KeyCode.W) & !grounded)
         {
             airControlable = true;
         }
         else
         {
             airControlable = false;
->>>>>>> Stashed changes
         }
-    }
-    void FixedUpdate()
-    {
-        if (!isOwned) { return;}
-        if (grounded)
+    } 
+         void FixedUpdate()
         {
-            rb.AddRelativeForce(movement * moveSpeed);
-        }
-        else
+            if (!isOwned) { return; }
+            if (grounded)
+            {
+                rb.AddRelativeForce(movement * moveSpeed);
+            }
+            else
+            {
+                rb.AddRelativeForce(movement * (moveSpeed * airDragMult));
+            }
+        if (airControlable)
         {
-            rb.AddRelativeForce(movement * (moveSpeed * airDragMult));
-        }
-<<<<<<< Updated upstream
-        
-=======
-        if (Input.GetKey(KeyCode.Space) & grounded)
-        {
-            Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
-            
-            rb.AddForce(Vector3.up * jumpHeight);
-        }
-    }
-    private IEnumerator airControl()
-    {
-        WaitForSeconds Wait = new WaitForSeconds(1f/ ticksPerSecond);
-        if (airControlable) {
+            Debug.Log("contorl");
             tempVelocity = new(rb.velocity.x, 0, rb.velocity.z);
             tempVelocity2 = rb.transform.forward * tempVelocity.magnitude;
             rb.velocity = new(((rb.velocity.x * (airControlMult - 1)) + tempVelocity2.x) / airControlMult, rb.velocity.y, ((rb.velocity.z * (airControlMult - 1)) + tempVelocity2.z) / airControlMult);
         }
-        yield return null;
->>>>>>> Stashed changes
     }
 }

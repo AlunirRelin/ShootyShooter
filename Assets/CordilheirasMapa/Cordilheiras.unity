@@ -239,10 +239,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  impactFx: {fileID: 0}
   enemyList: []
   nearestEnemy: {fileID: 0}
   target: {fileID: 0}
   range: 30
+  damage: 10
 --- !u!114 &39703136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6436,7 +6438,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1757479977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154f3ff7f38084d44905fa5c2d48d6f6, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1773430606

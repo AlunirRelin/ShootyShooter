@@ -489,17 +489,13 @@ MonoBehaviour:
   syncInterval: 0
   cvc: {fileID: 0}
   moveSpeed: 17
-  jumpHeight: 75
+  jumpHeight: 40
   groundDrag: 1
-  airDragMult: 0.3
+  airDragMult: 0.4
   playerHeight: 2
-<<<<<<< Updated upstream
-  velocityX: 0
-  velocityZ: 0
-  airControlMult: 1006
-=======
-  airControlMult: 1
->>>>>>> Stashed changes
+  airControlMult: 20
+  ticksPerSecond: 60
+  airControlable: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
