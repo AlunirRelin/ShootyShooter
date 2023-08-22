@@ -50,7 +50,7 @@ public class TowerBase : NetworkBehaviour
         if (target == null) return;
         Enemy enemy= target.GetComponent<Enemy>();
         enemy.Damage(damage);
-       // Instantiate(impactFx, target., Quaternion.LookRotation(target.normal));
+        Instantiate(impactFx, new Vector3(target.position.x,target.position.y+0.5f,target.position.z), Quaternion.LookRotation(target.forward));
     }
     private void OnDrawGizmosSelected()
     {
