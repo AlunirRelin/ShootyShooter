@@ -13,9 +13,13 @@ public class PlayerMovementController : NetworkBehaviour
     public float groundDrag;
     public float airDragMult;
     public float playerHeight;
-    public float velocityX;
-    public float velocityZ;
     public float airControlMult;
+    private Vector3 tempVelocity;
+    private Vector3 tempVelocity2;
+    public int ticksPerSecond = 60;
+    public float rotationAmount;
+    private bool airControlable;
+
 
     public LayerMask whatIsGround;
     public bool grounded;
@@ -51,6 +55,7 @@ public class PlayerMovementController : NetworkBehaviour
         {
             rb.drag = 0;
         }
+<<<<<<< Updated upstream
 
         if (Input.GetKey(KeyCode.Space) & grounded)
         {
@@ -58,6 +63,15 @@ public class PlayerMovementController : NetworkBehaviour
             rb.AddForce(Vector3.up * jumpHeight);
             rb.velocity = Vector3.Scale(rb.velocity, new(0.7f, 1, 0.7f));
             rb.AddRelativeForce(Vector3.forward * (Mathf.Abs(rb.velocity.x) +Mathf.Abs(rb.velocity.z))*airControlMult);
+=======
+        if(Input.GetKey(KeyCode.W) & !grounded)
+        {
+            airControlable = true;
+        }
+        else
+        {
+            airControlable = false;
+>>>>>>> Stashed changes
         }
     }
     void FixedUpdate()
@@ -71,6 +85,25 @@ public class PlayerMovementController : NetworkBehaviour
         {
             rb.AddRelativeForce(movement * (moveSpeed * airDragMult));
         }
+<<<<<<< Updated upstream
         
+=======
+        if (Input.GetKey(KeyCode.Space) & grounded)
+        {
+            Debug.Log("X = " +rb.velocity.x +" z = "+ rb.velocity.z);
+            
+            rb.AddForce(Vector3.up * jumpHeight);
+        }
+    }
+    private IEnumerator airControl()
+    {
+        WaitForSeconds Wait = new WaitForSeconds(1f/ ticksPerSecond);
+        if (airControlable) {
+            tempVelocity = new(rb.velocity.x, 0, rb.velocity.z);
+            tempVelocity2 = rb.transform.forward * tempVelocity.magnitude;
+            rb.velocity = new(((rb.velocity.x * (airControlMult - 1)) + tempVelocity2.x) / airControlMult, rb.velocity.y, ((rb.velocity.z * (airControlMult - 1)) + tempVelocity2.z) / airControlMult);
+        }
+        yield return null;
+>>>>>>> Stashed changes
     }
 }
