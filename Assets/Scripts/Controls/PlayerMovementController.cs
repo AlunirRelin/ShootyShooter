@@ -81,7 +81,6 @@ public class PlayerMovementController : NetworkBehaviour
             }
         if (airControlable)
         {
-            Debug.Log("contorl");
             tempVelocity = new(rb.velocity.x, 0, rb.velocity.z);
             tempVelocity2 = rb.transform.forward * tempVelocity.magnitude;
             rb.velocity = new(((rb.velocity.x * (airControlMult - 1)) + tempVelocity2.x) / airControlMult, rb.velocity.y, ((rb.velocity.z * (airControlMult - 1)) + tempVelocity2.z) / airControlMult);
