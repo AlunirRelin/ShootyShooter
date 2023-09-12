@@ -11,6 +11,9 @@ public class Player : NetworkBehaviour
     public int[] resources;
     public float MaxHp;
     public float Hp;
+    public float playerDamage = 1;
+    public float playerReload = 1;
+    public float playerTPS = 1;
     [Client]
     private void Start()
     {

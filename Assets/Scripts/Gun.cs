@@ -24,11 +24,11 @@ public class Gun : MonoBehaviour
     public int pelletCount = 1;
     public int magazine = 6;
     public int currentMagazine;
-    private float sinTime;
     public float reloadSpeed;
     public bool reloading;
     public Vector3 dmgPos;
     public float damageDealt;
+    public float currentDamage;
     public void Start()
     {
         GameObject go = GameObject.FindGameObjectWithTag("MainCamera");
@@ -51,17 +51,22 @@ public class Gun : MonoBehaviour
             forwardVector = Quaternion.AngleAxis(angle, Vector3.forward) * forwardVector;
             forwardVector = cam.transform.rotation * forwardVector;
 
-            if (Physics.Raycast(cam.transform.position, forwardVector, out hit, fallofRange))
+            if (Physics.Raycast(cam.transform.position, forwardVector, out hit))
             {
+                if(Vector3.Distance(cam.transform.position,hit.point) > fallofRange)
+                {
+                    Debug.Log(Vector3.Distance(cam.transform.position, hit.point));
+                }
                 enemy = hit.transform.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.Damage(damage);
+
+                    enemy.Damage(damage * player.playerDamage);
                     damageDealt += damage;
                     Instantiate(impactFx, hit.point, Quaternion.LookRotation(hit.normal));
                     dmgPos = hit.point;
                     dmgPos.y += 1;
-                    DmgText.text = damage.ToString();
+                   // DmgText.text = damage * damage ToString();
                     Instantiate(DmgText, dmgPos, gameObject.transform.rotation);
                 }
                 else
@@ -74,7 +79,7 @@ public class Gun : MonoBehaviour
     public IEnumerator Reload()
     {
         reloading = true;
-        yield return new WaitForSeconds(reloadSpeed);
+        yield return new WaitForSeconds(reloadSpeed * player.playerReload);
         currentMagazine = magazine;
         reloading = false;
     }

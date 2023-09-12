@@ -265,6 +265,9 @@ MonoBehaviour:
   resources: 00000000000000000000000000000000
   MaxHp: 100
   Hp: 100
+  playerDamage: 1
+  playerReload: 1
+  playerTPS: 1
 --- !u!114 &3011277698951842018
 MonoBehaviour:
   m_ObjectHideFlags: 0
