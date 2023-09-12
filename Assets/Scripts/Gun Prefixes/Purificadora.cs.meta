@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d246b96065f81ff48be0da5dda7c7ff2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - cam: {instanceID: 0}
+  - muzzleFlash: {instanceID: 0}
+  - impactFx: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b,
+      type: 3}
+  - missFx: {fileID: 8038344524183138613, guid: 0277167a12290af47801444830a2be97,
+      type: 3}
+  - DmgTextObj: {fileID: 7833442283972513928, guid: 8490820e890d8244ea043c65798fc4f8,
+      type: 3}
+  - DmgText: {fileID: 7523771970667325265, guid: 8490820e890d8244ea043c65798fc4f8,
+      type: 3}
+  - playerMovementController: {instanceID: 0}
+  - enemy: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

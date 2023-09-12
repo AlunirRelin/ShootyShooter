@@ -11,11 +11,17 @@ public class TowerBase : NetworkBehaviour
     public GameObject nearestEnemy;
     public Transform target;
     public float range = 15f;
+    public float radius;
     public float damage = 10f;
+    public float tps;
+    public enum TowerType {ST,AOE,NoTarget};
+    public TowerType type;
     void Start()
     {
         InvokeRepeating(nameof(FindTarget), 0f,0.2f);
-        InvokeRepeating(nameof(Shoot),0f,1f);
+        InvokeRepeating(nameof(Shoot),0f,tps);
+        InvokeRepeating(nameof(ShootAOE), 0f, tps);
+
     }
     private void Update()
     {
@@ -48,13 +54,58 @@ public class TowerBase : NetworkBehaviour
     void Shoot()
     {
         if (target == null) return;
-        Enemy enemy= target.GetComponent<Enemy>();
-        enemy.Damage(damage);
-        Instantiate(impactFx, new Vector3(target.position.x,target.position.y+0.5f,target.position.z), Quaternion.LookRotation(target.forward));
+        switch (type)
+        {
+            case TowerType.ST:
+                ShootST();
+                break;
+            case TowerType.AOE:
+                ShootAOE();
+                break;
+            case TowerType.NoTarget:
+            default:
+                break;
+        }
+        
     }
-    private void OnDrawGizmosSelected()
+    void ShootST()
+    {
+        Enemy enemy = target.GetComponent<Enemy>();
+        enemy.Damage(damage);
+        Instantiate(impactFx, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z), Quaternion.LookRotation(target.forward));
+    }
+    void ShootAOE()
+    {
+        if(target == null) return;
+        Collider[] colliders = Physics.OverlapSphere(target.position, radius);
+        foreach(Collider collider in colliders)
+        {
+            if(collider.CompareTag("Enemy"))
+            {
+               collider.GetComponent<Enemy>().Damage(damage);
+            }
+        }
+    }
+    void ShootSelf()
+    {
+        if (target == null) return;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.GetComponent<Enemy>().Damage(damage);
+            }
+        }
+    }
+    public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
+    public void UpdateTower()
+    {
+        CancelInvoke(nameof(Shoot));
     }
 }

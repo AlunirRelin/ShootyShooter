@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 60420421409639001}
   - component: {fileID: 4548451921871288369}
   m_Layer: 0
-  m_Name: gunBase
+  m_Name: Toxina 27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,10 @@ MonoBehaviour:
   DmgTextObj: {fileID: 7833442283972513928, guid: 8490820e890d8244ea043c65798fc4f8,
     type: 3}
   DmgText: {fileID: 7523771970667325265, guid: 8490820e890d8244ea043c65798fc4f8, type: 3}
-  damage: 10
-  fallofRange: 100
-  fireRate: 15
+  auto: 0
+  damage: 6
+  fallofRange: 35
+  fireRate: 6
   FireCooldown: 0
+  Spread: 2
+  pelletCount: 1

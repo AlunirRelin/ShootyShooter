@@ -9,6 +9,8 @@ public class Player : NetworkBehaviour
     Vector3 direction = new Vector3(1,0,1);
     Rigidbody rb;
     public int[] resources;
+    public float MaxHp;
+    public float Hp;
     [Client]
     private void Start()
     {
@@ -26,4 +28,12 @@ public class Player : NetworkBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+    public void Damage(float damage)
+    {
+        Hp -= damage;
+        if (Hp <= 0)
+        {
+        }
+    }
+
 }
