@@ -56,6 +56,7 @@ public class Gun : MonoBehaviour
                 if(Vector3.Distance(cam.transform.position,hit.point) > fallofRange)
                 {
                     Debug.Log(Vector3.Distance(cam.transform.position, hit.point));
+                    currentDamage = ((damage / (fallofRange / Vector3.Distance(cam.transform.position, hit.point))) + damage) / 2;
                 }
                 enemy = hit.transform.GetComponent<Enemy>();
                 if (enemy != null)
