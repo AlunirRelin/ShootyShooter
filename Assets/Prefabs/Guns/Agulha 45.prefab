@@ -147,7 +147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7875933360197671286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b3f015a7587138419cb05d4786927e4, type: 3}
+  m_Script: {fileID: 11500000, guid: b6dac22c430ad3c4e94ff2b8dec5d879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
@@ -158,6 +158,9 @@ MonoBehaviour:
   DmgTextObj: {fileID: 7833442283972513928, guid: 8490820e890d8244ea043c65798fc4f8,
     type: 3}
   DmgText: {fileID: 7523771970667325265, guid: 8490820e890d8244ea043c65798fc4f8, type: 3}
+  playerMovementController: {fileID: 0}
+  player: {fileID: 0}
+  enemy: {fileID: 0}
   auto: 0
   damage: 80
   fallofRange: 54
@@ -165,3 +168,10 @@ MonoBehaviour:
   FireCooldown: 0
   Spread: 1
   pelletCount: 1
+  magazine: 6
+  currentMagazine: 0
+  reloadSpeed: 0
+  reloading: 0
+  dmgPos: {x: 0, y: 0, z: 0}
+  damageDealt: 0
+  currentDamage: 0

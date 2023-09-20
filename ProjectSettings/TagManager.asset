@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PatrolPoints
   - Enemy
+  - Buttons
   layers:
   - Default
   - TransparentFX

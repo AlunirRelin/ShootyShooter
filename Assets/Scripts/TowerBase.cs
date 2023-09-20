@@ -14,14 +14,16 @@ public class TowerBase : NetworkBehaviour
     public float radius;
     public float damage = 10f;
     public float tps;
+    public Slow enemySlow;
+    public float timer;
+    public float debuff;
     public enum TowerType {ST,AOE,NoTarget};
     public TowerType type;
+    protected bool[] upgraded = new bool[4];
     void Start()
     {
         InvokeRepeating(nameof(FindTarget), 0f,0.2f);
         InvokeRepeating(nameof(Shoot),0f,tps);
-        InvokeRepeating(nameof(ShootAOE), 0f, tps);
-
     }
     private void Update()
     {
@@ -51,7 +53,7 @@ public class TowerBase : NetworkBehaviour
             target = nearestEnemy.transform;
         }
     }
-    void Shoot()
+    protected virtual void Shoot()
     {
         if (target == null) return;
         switch (type)
@@ -63,6 +65,8 @@ public class TowerBase : NetworkBehaviour
                 ShootAOE();
                 break;
             case TowerType.NoTarget:
+                ShootSelf();
+                break;
             default:
                 break;
         }
@@ -73,6 +77,9 @@ public class TowerBase : NetworkBehaviour
         Enemy enemy = target.GetComponent<Enemy>();
         enemy.Damage(damage);
         Instantiate(impactFx, new Vector3(target.position.x, target.position.y + 0.5f, target.position.z), Quaternion.LookRotation(target.forward));
+        enemySlow = enemy.gameObject.AddComponent<Slow>();
+        enemySlow.timer = timer;
+        enemySlow.speedDebuff = debuff;
     }
     void ShootAOE()
     {
@@ -82,7 +89,11 @@ public class TowerBase : NetworkBehaviour
         {
             if(collider.CompareTag("Enemy"))
             {
-               collider.GetComponent<Enemy>().Damage(damage);
+                collider.GetComponent<Enemy>().Damage(damage);
+                Enemy enemy = collider.GetComponent<Enemy>();
+                enemySlow = enemy.gameObject.AddComponent<Slow>();
+                enemySlow.timer = timer;
+                enemySlow.speedDebuff = debuff;
             }
         }
     }
@@ -95,6 +106,10 @@ public class TowerBase : NetworkBehaviour
             if (collider.CompareTag("Enemy"))
             {
                 collider.GetComponent<Enemy>().Damage(damage);
+                Enemy enemy = collider.GetComponent<Enemy>();
+                enemySlow = enemy.gameObject.AddComponent<Slow>();
+                enemySlow.timer = timer;
+                enemySlow.speedDebuff = debuff;
             }
         }
     }
@@ -104,8 +119,9 @@ public class TowerBase : NetworkBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
         Gizmos.DrawWireSphere(transform.position, radius);
     }
-    public void UpdateTower()
+    public virtual void UpdateTower(int index)
     {
-        CancelInvoke(nameof(Shoot));
+       Debug.Log("isso ? um TowerBase e n?o contem upgrades");
+       Debug.Log(index);
     }
 }

@@ -13,8 +13,7 @@ public class ApplySlow : Gun
       base.Shoot();
         if(enemy!=null && enemy.Hp> 0)
         {
-            enemy.gameObject.AddComponent<Slow>();
-            enemySlow = enemy.GetComponent<Slow>();
+            enemySlow = enemy.gameObject.AddComponent<Slow>();
             enemySlow.timer = timer;
             enemySlow.speedDebuff = debuff;
         }

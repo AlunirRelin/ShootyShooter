@@ -39,5 +39,10 @@ public class PlayerShootingController : NetworkBehaviour
         {
             StartCoroutine(gun.Reload());
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("shot");
+            gun.TowerUpgrade();
+        }
     }
 }
