@@ -3,12 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
+using TMPro;
+
 
 public class PlayerShootingController : NetworkBehaviour
 {
     public GameObject[] gunObject;
     public Gun gun;
     public bool shot = false;
+    public TextMeshProUGUI[] ammoText;
+    public void Start()
+    {
+        GameObject ammoGO = GameObject.FindGameObjectWithTag("Armas");
+        int i = 0;
+        foreach (Transform child in ammoGO.transform)
+        {
+            if(child.GetComponent<TextMeshProUGUI>() != null)
+            {
+                ammoText[i] = child.gameObject.GetComponent<TextMeshProUGUI>();
+                i++;
+            }
+        }
+    }
     public void Update()
     {
         if (!isOwned) { return; }
@@ -44,5 +60,8 @@ public class PlayerShootingController : NetworkBehaviour
             Debug.Log("shot");
             gun.TowerUpgrade();
         }
+        ammoText[0].text = gunObject[0].GetComponent<Gun>().currentMagazine.ToString();
+        ammoText[1].text = gunObject[1].GetComponent<Gun>().currentMagazine.ToString();
+
     }
 }

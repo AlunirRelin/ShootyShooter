@@ -7,6 +7,9 @@ TagManager:
   - PatrolPoints
   - Enemy
   - Buttons
+  - Slider
+  - Resource
+  - Armas
   layers:
   - Default
   - TransparentFX

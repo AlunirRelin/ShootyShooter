@@ -268,6 +268,12 @@ MonoBehaviour:
   playerDamage: 1
   playerReload: 1
   playerTPS: 1
+  playerHP: {fileID: 0}
+  resourcesText:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3011277698951842018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,6 +406,9 @@ MonoBehaviour:
   - {fileID: 8823619631785922144}
   gun: {fileID: 5104090258389953710}
   shot: 0
+  ammoText:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &270134869248442806
 BoxCollider:
   m_ObjectHideFlags: 0
