@@ -37,7 +37,6 @@ public class Enemy : NetworkBehaviour
     {
         if (!agent.pathPending && agent.remainingDistance <= stopDistance && patrolPoints.Count> 0)
         {
-            Debug.Log("target");
             if (patrolPoints.Count > 1)
             {
                 agent.destination = patrolPoints[1].position;
