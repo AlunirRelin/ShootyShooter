@@ -10,6 +10,9 @@ TagManager:
   - Slider
   - Resource
   - Armas
+  - Spawner
+  - Wave
+  - Resp
   layers:
   - Default
   - TransparentFX

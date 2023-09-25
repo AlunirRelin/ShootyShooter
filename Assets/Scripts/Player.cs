@@ -15,14 +15,18 @@ public class Player : NetworkBehaviour
     public float playerDamage = 1;
     public float playerReload = 1;
     public float playerTPS = 1;
+    public GameObject[] TowerSet;
     public Slider playerHP;
     public TextMeshProUGUI[] resourcesText;
+    public Transform respawnPoint;
     [Client]
     private void Start()
     {
         networkManagerHUD = GetComponent<NetworkManagerHUD>();
         playerHP = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
         GameObject resourceGo = GameObject.FindGameObjectWithTag("Resource");
+        GameObject RespawnGO = GameObject.FindGameObjectWithTag("Resp");
+        respawnPoint = RespawnGO.transform;
         int i = 0;
         foreach (Transform child in resourceGo.transform)
         {
@@ -52,6 +56,8 @@ public class Player : NetworkBehaviour
         Hp -= damage;
         if (Hp <= 0)
         {
+            Hp = MaxHp;
+            gameObject.transform.position = respawnPoint.position;
         }
     }
 

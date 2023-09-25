@@ -12,6 +12,7 @@ public class PlayerShootingController : NetworkBehaviour
     public Gun gun;
     public bool shot = false;
     public TextMeshProUGUI[] ammoText;
+    public int TowerChosen;
     public void Start()
     {
         GameObject ammoGO = GameObject.FindGameObjectWithTag("Armas");
@@ -57,11 +58,24 @@ public class PlayerShootingController : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("shot");
             gun.TowerUpgrade();
         }
         ammoText[0].text = gunObject[0].GetComponent<Gun>().currentMagazine.ToString();
         ammoText[1].text = gunObject[1].GetComponent<Gun>().currentMagazine.ToString();
-
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            TowerChosen = 0;
+            gun.BuildTower(TowerChosen);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            TowerChosen = 1;
+            gun.BuildTower(TowerChosen);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            TowerChosen = 2;
+            gun.BuildTower(TowerChosen);
+        }
     }
 }

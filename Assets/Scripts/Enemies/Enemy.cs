@@ -14,6 +14,7 @@ public class Enemy : NetworkBehaviour
     public float aggroRange;
     public Player targetPlayer;
     public GameObject[] enemyList;
+
     [SerializeField]
     private float stopDistance;
     public Animator anim;
@@ -21,16 +22,21 @@ public class Enemy : NetworkBehaviour
     public float attCooldown;
     public float attTime;
     public float attDamage;
+    public int randomPath;
+    public int PointReward = 1;
+    public Spawner spawner;
     void Start()
     {
         anim = GetComponent<Animator>();
         Hp = maxHp;
         GameObject patrolPointsList = GameObject.FindGameObjectWithTag("PatrolPoints");
+        GameObject spawnerGO = GameObject.FindGameObjectWithTag("Spawner");
+        spawner = spawnerGO.GetComponent<Spawner>();
         foreach(Transform child in patrolPointsList.transform)
         {
             patrolPoints.Add(child);
         }
-        agent.destination = patrolPoints[0].position;
+        agent.destination = new( patrolPoints[0].position.x +randomPath, patrolPoints[0].position.y, patrolPoints[0].position.z);
         InvokeRepeating(nameof(FindTarget), 0f, 0.1f);
     }
     void Update()
@@ -39,7 +45,7 @@ public class Enemy : NetworkBehaviour
         {
             if (patrolPoints.Count > 1)
             {
-                agent.destination = patrolPoints[1].position;
+                agent.destination = new(patrolPoints[1].position.x + randomPath, patrolPoints[1].position.y, patrolPoints[1].position.z);
             }
             patrolPoints.RemoveAt(0);
         }
@@ -49,6 +55,7 @@ public class Enemy : NetworkBehaviour
         Hp -= damage;
         if (Hp <= 0)
         {
+            spawner.Points += PointReward;
             Destroy(gameObject);
         }
     }

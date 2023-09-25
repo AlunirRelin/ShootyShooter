@@ -16,12 +16,13 @@ public class Armadilha : TowerBase
                 damage += 3;
                 break;
             case 2:
-                if (tps <= 0.5)
+                if (tps >= 0.5)
                 {
+                    tps -= 0.3f;
                     upgraded[2] = true;
+                    CancelInvoke();
+                    InvokeRepeating(nameof(Shoot), 0f, tps);
                 }
-                CancelInvoke();
-                InvokeRepeating(nameof(Shoot), 0f, tps);
                 break;
             case 3:
                 debuff = 20;

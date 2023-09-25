@@ -31,6 +31,8 @@ public class Gun : MonoBehaviour
     public float currentDamage;
     private TowerBase selectedTower;
     public ButtonList buttonList;
+    public TowerSpot towerSpot;
+    public Vector3 towerSpotPosition;
     public void Start()
     {
         GameObject go = GameObject.FindGameObjectWithTag("MainCamera");
@@ -96,10 +98,10 @@ public class Gun : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, forwardVector, out hit))
         {
-            Debug.Log("hit");
             selectedTower = hit.transform.GetComponent<TowerBase>();
             if (selectedTower != null)
             {
+                buttonList.OnChoose();
                 if (!buttonList.listActive)
                 {
                     Cursor.lockState = CursorLockMode.Confined;
@@ -140,5 +142,25 @@ public class Gun : MonoBehaviour
             buttonList.transform.GetChild(i).gameObject.SetActive(false);
         }
         buttonList.listActive = !buttonList.listActive;
+    }
+    public void BuildTower(int towerChosen)
+    {
+        RaycastHit hit;
+        Vector3 forwardVector = Vector3.forward;
+        forwardVector = cam.transform.rotation * forwardVector;
+
+        if (Physics.Raycast(cam.transform.position, forwardVector, out hit))
+        {
+             towerSpot = hit.transform.GetComponent<TowerSpot>();
+            if(towerSpot != null && !towerSpot.Filled)
+            {
+                towerSpotPosition = towerSpot.transform.position;
+                towerSpot.Filled = true;
+                Debug.Log("tower spot exists");
+                towerSpotPosition = towerSpot.transform.position;
+                towerSpotPosition.y += 1.5f;
+                Instantiate(player.TowerSet[towerChosen],towerSpotPosition, Quaternion.identity) ;
+            }
+        }
     }
 }

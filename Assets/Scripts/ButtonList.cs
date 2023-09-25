@@ -13,13 +13,18 @@ public class ButtonList : MonoBehaviour
     {
         selectedTower = FindObjectOfType<TowerBase>();
     }
-    private void OnEnable()
+    public void OnChoose()
     {
         selectedTower = FindObjectOfType<TowerBase>();
         Cursor.lockState = CursorLockMode.Confined;
+        if (selectedTower == null)
+        {
+            return;
+        }
         foreach (UpgradeButton button in buttons)
         {
             button.Upgrade = (int bazinga) => { };
+            Debug.Log(button.transform.name);
             button.Upgrade = selectedTower.UpdateTower;
         }
     }

@@ -45,7 +45,7 @@ public class PlayerMovementController : NetworkBehaviour
         if (!isOwned) { return; }
         direction = controls.ReadValue<Vector2>();
         movement = new Vector3(direction.x, 0, direction.y);
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 1.2f, whatIsGround);
 
         if (grounded)
         {
