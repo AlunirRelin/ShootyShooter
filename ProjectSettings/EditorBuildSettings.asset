@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/CordilheirasMapa/Cordilheiras.unity
-    guid: 346826523985ff24e833bcfb266372a8
+    path: Assets/Scenes/Mapa2.unity
+    guid: 9cfd731cd643a824db4962058a73d97b
   m_configObjects: {}

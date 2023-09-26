@@ -502,6 +502,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3000262074023585926}
     m_Modifications:
+    - target: {fileID: 679323028958103954, guid: 1385e9f04b1124e4e9aa587cbb767a65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1916606094938395126, guid: 1385e9f04b1124e4e9aa587cbb767a65,
         type: 3}
       propertyPath: m_RootOrder
@@ -557,10 +562,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5877888792837421289, guid: 1385e9f04b1124e4e9aa587cbb767a65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7875933360197671286, guid: 1385e9f04b1124e4e9aa587cbb767a65,
         type: 3}
       propertyPath: m_Name
       value: Banquete 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875933360197671286, guid: 1385e9f04b1124e4e9aa587cbb767a65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7875933360197671286, guid: 1385e9f04b1124e4e9aa587cbb767a65,
         type: 3}
@@ -648,6 +663,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: homer_simpsons_final
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1263bf2a0afd1b4b850020f443a953f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1263bf2a0afd1b4b850020f443a953f, type: 3}
 --- !u!4 &6098547145075329221 stripped
@@ -663,6 +683,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3000262074023585926}
     m_Modifications:
+    - target: {fileID: 1318499843236601375, guid: 896ced51ccd8b8e4d99065445dc6560d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1916606094938395126, guid: 896ced51ccd8b8e4d99065445dc6560d,
         type: 3}
       propertyPath: m_RootOrder
@@ -718,10 +743,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5877888792837421289, guid: 896ced51ccd8b8e4d99065445dc6560d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7875933360197671286, guid: 896ced51ccd8b8e4d99065445dc6560d,
         type: 3}
       propertyPath: m_Name
       value: Estase 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875933360197671286, guid: 896ced51ccd8b8e4d99065445dc6560d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 896ced51ccd8b8e4d99065445dc6560d, type: 3}

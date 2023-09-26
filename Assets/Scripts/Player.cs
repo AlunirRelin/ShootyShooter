@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Player : NetworkBehaviour
 {
@@ -33,10 +34,20 @@ public class Player : NetworkBehaviour
             resourcesText[i] = child.gameObject.GetComponent<TextMeshProUGUI>();
             i++;
         }
+        if (!isLocalPlayer) { return; }
+            Debug.Log("parented");
+            var children = gameObject.GetComponentsInChildren<Transform>(includeInactive: true);
+            foreach (var child in children)
+            {
+                if( child.GetComponent<CinemachineVirtualCamera>() == null)
+                {
+                    child.gameObject.layer = LayerMask.NameToLayer("TheSelf"); ;
+                }
+            }
     }
     void Update()
     {
-        if(!isOwned){ return; }
+        if(!isLocalPlayer){ return; }
         if (Input.GetKeyUp(KeyCode.Space))
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -60,5 +71,9 @@ public class Player : NetworkBehaviour
             gameObject.transform.position = respawnPoint.position;
         }
     }
-
+    public bool TellIfOwned()
+    {
+        Debug.Log("telling");
+        return isOwned;
+    }
 }
